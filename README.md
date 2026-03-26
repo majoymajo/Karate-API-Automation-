@@ -45,66 +45,45 @@ mvn clean compile -DskipTests
 mvn test
 ```
 
-### Ejecutar por archivo de feature
+### Ejecutar por archivo de feature (CLI Overrides)
+
+Para que Maven no se confunda con los caracteres especiales en Windows (PowerShell/CMD), **encapsula toda la propiedad del sistema entre comillas**:
 
 ```bash
-# Solo pruebas de productos (APIs 1-6)
-mvn test -Dkarate.options="classpath:automationexercise/products.feature"
+# Solo pruebas de productos (Sin el tag @API-N)
+mvn test "-Dkarate.options=classpath:automationexercise/products.feature"
 
-# Solo pruebas de cuenta (APIs 11, 12, 13)
-mvn test -Dkarate.options="classpath:automationexercise/account.feature"
+# Solo pruebas de cuenta
+mvn test "-Dkarate.options=classpath:automationexercise/account.feature"
 
-# Solo pruebas de login (APIs 7-10)
-mvn test -Dkarate.options="classpath:automationexercise/login.feature"
+# Solo pruebas de login
+mvn test "-Dkarate.options=classpath:automationexercise/login.feature"
 
-# Solo pruebas de detalle de usuario (API 14)
-mvn test -Dkarate.options="classpath:automationexercise/user_detail.feature"
+# Solo pruebas de detalle de usuario
+mvn test "-Dkarate.options=classpath:automationexercise/user_detail.feature"
 ```
 
-### Ejecutar por método HTTP (usando tags)
+### Ejecutar por método HTTP o Tags personalizados
 
 ```bash
-# Solo escenarios GET
-mvn test -Dkarate.options="--tags @GET"
+# Ejecutar solo un tag específico (Recomendado)
+mvn test "-Dkarate.options=--tags @GET"
 
-# Solo escenarios POST
-mvn test -Dkarate.options="--tags @POST"
-
-# Solo escenarios PUT
-mvn test -Dkarate.options="--tags @PUT"
-
-# Solo escenarios DELETE
-mvn test -Dkarate.options="--tags @DELETE"
+# Combinar tags (Todos los @POST que NO sean @negative)
+mvn test "-Dkarate.options=--tags @POST --tags ~@negative"
 ```
 
 ### Ejecutar escenarios negativos
 
 ```bash
-mvn test -Dkarate.options="--tags @negative"
-```
-
-### Ejecutar un API específica
-
-```bash
-# Ejemplo: solo API 7 (Verify Login con datos válidos)
-mvn test -Dkarate.options="--tags @API-7"
-```
-
-### Ejecución rápida con Gradle (alternativa)
-
-```bash
-# Todas las pruebas
-gradle test
-
-# Con tags
-gradle test -Dkarate.options="--tags @GET"
+mvn test "-Dkarate.options=--tags @negative"
 ```
 
 ---
 
 ## 📊 Reportes
 
-Después de ejecutar las pruebas, los reportes se generan automáticamente en:
+Después de cada ejecución (sea total o parcial), los reportes se actualizan en:
 
 ```
 target/karate-reports/karate-summary.html
