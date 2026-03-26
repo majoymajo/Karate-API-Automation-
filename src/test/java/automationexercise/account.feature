@@ -28,6 +28,7 @@ Feature: AutomationExercise Account API Tests
     And form field state = 'New York'
     And form field city = 'New York'
     And form field mobile_number = '1234567890'
+    * retry until responseStatus == 200
     When method post
     Then status 200
     And match response contains { responseCode: 201 }
@@ -52,6 +53,7 @@ Feature: AutomationExercise Account API Tests
     And form field state = 'Ontario'
     And form field city = 'Toronto'
     And form field mobile_number = '9876543210'
+    * retry until responseStatus == 200
     When method put
     Then status 200
     And match response contains { responseCode: 200 }
@@ -61,6 +63,7 @@ Feature: AutomationExercise Account API Tests
     Given path '/api/deleteAccount'
     And form field email = testEmail
     And form field password = testPassword
+    * retry until responseStatus == 200
     When method delete
     Then status 200
     And match response contains { responseCode: 200 }

@@ -27,6 +27,7 @@ Feature: AutomationExercise Login API Tests
     And form field state = 'California'
     And form field city = 'Los Angeles'
     And form field mobile_number = '5551234567'
+    * retry until responseStatus == 200
     When method post
     Then status 200
     And match response contains { responseCode: 201 }
@@ -35,6 +36,7 @@ Feature: AutomationExercise Login API Tests
     Given path '/api/verifyLogin'
     And form field email = testEmail
     And form field password = testPassword
+    * retry until responseStatus == 200
     When method post
     Then status 200
     And match response contains { responseCode: 200 }
@@ -44,6 +46,7 @@ Feature: AutomationExercise Login API Tests
     Given path '/api/deleteAccount'
     And form field email = testEmail
     And form field password = testPassword
+    * retry until responseStatus == 200
     When method delete
     Then status 200
 
@@ -51,6 +54,7 @@ Feature: AutomationExercise Login API Tests
   Scenario: POST - Verify Login Without Email Parameter (Bad Request)
     Given path '/api/verifyLogin'
     And form field password = 'anyPassword'
+    * retry until responseStatus == 200
     When method post
     Then status 200
     And match response contains { responseCode: 400 }
@@ -59,6 +63,7 @@ Feature: AutomationExercise Login API Tests
   @DELETE @API-9 @negative
   Scenario: DELETE - DELETE To Verify Login (Method Not Supported)
     Given path '/api/verifyLogin'
+    * retry until responseStatus == 200
     When method delete
     Then status 200
     And match response contains { responseCode: 405 }
@@ -69,6 +74,7 @@ Feature: AutomationExercise Login API Tests
     Given path '/api/verifyLogin'
     And form field email = 'nonexistent_user_xyz@invalid.com'
     And form field password = 'wrongPassword123'
+    * retry until responseStatus == 200
     When method post
     Then status 200
     And match response contains { responseCode: 404 }

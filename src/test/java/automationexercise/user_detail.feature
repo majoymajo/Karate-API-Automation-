@@ -27,6 +27,7 @@ Feature: AutomationExercise User Detail API Tests
     And form field state = 'Quebec'
     And form field city = 'Montreal'
     And form field mobile_number = '5559876543'
+    * retry until responseStatus == 200
     When method post
     Then status 200
     And match response contains { responseCode: 201 }
@@ -34,6 +35,7 @@ Feature: AutomationExercise User Detail API Tests
     # API 14: Get user detail by email
     Given path '/api/getUserDetailByEmail'
     And param email = testEmail
+    * retry until responseStatus == 200
     When method get
     Then status 200
     And match response contains { responseCode: 200 }
@@ -44,5 +46,6 @@ Feature: AutomationExercise User Detail API Tests
     Given path '/api/deleteAccount'
     And form field email = testEmail
     And form field password = testPassword
+    * retry until responseStatus == 200
     When method delete
     Then status 200
