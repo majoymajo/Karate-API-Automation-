@@ -8,7 +8,6 @@ Feature: AutomationExercise Login API Tests
 
   @POST @API-7
   Scenario: POST - Verify Login with Valid Details
-    # Pre-requisite: Create an account first
     Given path '/api/createAccount'
     And form field name = testName
     And form field email = testEmail
@@ -32,7 +31,6 @@ Feature: AutomationExercise Login API Tests
     Then status 200
     And match response contains { responseCode: 201 }
 
-    # API 7: Verify Login with valid credentials
     Given path '/api/verifyLogin'
     And form field email = testEmail
     And form field password = testPassword
@@ -42,7 +40,6 @@ Feature: AutomationExercise Login API Tests
     And match response contains { responseCode: 200 }
     And match response.message == 'User exists!'
 
-    # Cleanup: Delete the created account
     Given path '/api/deleteAccount'
     And form field email = testEmail
     And form field password = testPassword

@@ -9,7 +9,6 @@ Feature: AutomationExercise Account API Tests
   @POST @PUT @DELETE @API-11 @API-13 @API-12
   Scenario: POST - Create Account, PUT - Update Account & DELETE - Delete Account
 
-    # Step 1: POST - Create a new user account (API 11)
     Given path '/api/createAccount'
     And form field name = testName
     And form field email = testEmail
@@ -34,7 +33,6 @@ Feature: AutomationExercise Account API Tests
     And match response contains { responseCode: 201 }
     And match response.message == 'User created!'
 
-    # Step 2: PUT - Update the user account (API 13)
     Given path '/api/updateAccount'
     And form field name = testName + '_updated'
     And form field email = testEmail
@@ -59,7 +57,6 @@ Feature: AutomationExercise Account API Tests
     And match response contains { responseCode: 200 }
     And match response.message == 'User updated!'
 
-    # Step 3: DELETE - Delete the user account (API 12)
     Given path '/api/deleteAccount'
     And form field email = testEmail
     And form field password = testPassword
