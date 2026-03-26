@@ -1,0 +1,36 @@
+# Maven artifacts
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle artifacts
+.gradle/
+build/
+
+# JetBrains IDE
+.idea/
+*.iml
+*.iws
+
+# Eclipse IDE
+.settings/
+.classpath
+.project
+
+# VS Code
+.vscode/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+karate.log
